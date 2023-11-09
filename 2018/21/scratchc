@@ -1,0 +1,37 @@
+
+
+
+int main() {
+    mod = 1505483;
+    r = 1<<16;
+    lmod = 0;
+    lr = 0;
+    do {
+        r = mod | 1<<16;
+        mod = 1505483;
+
+        do  {
+            mod = clip(clip(mod + (r & 255)) * 65899);
+        } while ( r = r >> 8; r > 256) ;
+
+
+        /* @4 = 0; */
+        /* while (true) { */
+        /*     @5 = (4 + 1) << 8; */
+        /*     if (5 > 2) */
+        /*         @2 = @4 */
+        /*         goto L; */
+        /*     @4++ ; */
+        /* } */
+        if (smod == 0 && sr == 0) {
+            smod = mod;
+            sr = r;
+        }
+        if (mod == smod && sr == r) {
+            printf("Last mod: %d\n", lmod);
+            flush();
+        }
+        lmod = mod;
+        lr = r;
+    } while (mod != 0);
+}
